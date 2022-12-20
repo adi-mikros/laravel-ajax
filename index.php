@@ -18,6 +18,17 @@
     <link href="plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
     <link href="assets/css/dashboard/dash_1.css" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <script>
+	if (typeof(Storage) !== "undefined") {
+	    //siiip
+	} else {
+	    alert("Maaf Browser tidak support! Silahkan update lebih baik");
+			window.location.href="https://www.google.com/chrome/";
+	}
+	if(localStorage.getItem("usernama")===null){
+		window.location = "login.php";
+	}
+	</script>
 </head>
 
 <body>
@@ -295,50 +306,53 @@
                     air_quality = data.data.current.pollution.aqius;
                     humidty = data.data.current.weather.hu;
 
+                    //kirim data ke database utk riwayat
+                    kirimdata();
+
                     //status kebakaran
-                    if(humidty<45 && air_quality > 300 && suhu > 29.7){
+                    if (humidty < 45 && air_quality > 300 && suhu > 29.7) {
                         prob_kebakaran.innerHTML = '<h3 style="color:red;"><b>Status Kemungkinan Kebakaran</b></h3>';
                         ic_prob_kebakaran.innerHTML = '<img src="./assets/img/icon-api-merah.png" alt="api-aman" style="max-width: 200px;" />';
                         stat_prob_kebakaran.innerHTML = '<h5 class="" style="color:red;">Status : Kemungkinan Tinggi Kebakaran</h5>';
-      
-                    }else{
+
+                    } else {
                         prob_kebakaran.innerHTML = '<h3 style="color:green;"><b>Status Kemungkinan Kebakaran</b></h3>';
                         ic_prob_kebakaran.innerHTML = '<img src="./assets/img/icon-api-hijau.png" alt="kelembaman-aman" style="max-width: 200px;" />';
                         stat_prob_kebakaran.innerHTML = '<h5 class="" style="color:green;">Status : Kemungkinan Rendah Kebakaran</h5>';
                     }
 
                     //kelembapan
-                    if(humidty >= 45 && humidty<=65){
+                    if (humidty >= 45 && humidty <= 65) {
                         img_kelembapan.innerHTML = '<img src="./assets/img/icon-kelembaman-hijau.png" alt="kelembaman-aman" style="max-width: 200px;" />';
                         val_kelembapan.innerHTML = humidty;
                         stat_kelembapan.innerHTML = 'Aman';
-                    }else{
+                    } else {
                         img_kelembapan.innerHTML = '<img src="./assets/img/icon-kelembaman-merah.png" alt="kelembaman-aman" style="max-width: 200px;" />';
                         val_kelembapan.innerHTML = humidty;
                         stat_kelembapan.innerHTML = 'Bahaya';
                     }
 
                     //air quality
-                    if(air_quality <=300){
+                    if (air_quality <= 300) {
                         img_airc.innerHTML = '<img src="./assets/img/icon-kelembaman-hijau.png" alt="kelembaman-aman" style="max-width: 200px;" />';
                         val_airc.innerHTML = air_quality;
                         stat_airc.innerHTML = 'Aman';
-                    }else{
+                    } else {
                         img_airc.innerHTML = '<img src="./assets/img/icon-kelembaman-merah.png" alt="kelembaman-aman" style="max-width: 200px;" />';
                         val_airc.innerHTML = air_quality;
                         stat_airc.innerHTML = 'Bahaya';
                     }
 
                     //suhu
-                    if(suhu < 21.7){
+                    if (suhu < 21.7) {
                         img_suhu.innerHTML = '<img src="./assets/img/icon-suhu-biru.png" alt="kelembaman-aman" style="max-width: 200px;" />';
                         val_suhu.innerHTML = suhu;
                         stat_suhu.innerHTML = 'Dingin';
-                    }else if(suhu>=21.7 && suhu<=29.7){
+                    } else if (suhu >= 21.7 && suhu <= 29.7) {
                         img_suhu.innerHTML = '<img src="./assets/img/icon-suhu-hijau.png" alt="kelembaman-aman" style="max-width: 200px;" />';
                         val_suhu.innerHTML = suhu;
                         stat_suhu.innerHTML = 'Normal';
-                    }else{
+                    } else {
                         img_suhu.innerHTML = '<img src="./assets/img/icon-suhu-merah.png" alt="kelembaman-aman" style="max-width: 200px;" />';
                         val_suhu.innerHTML = suhu;
                         stat_suhu.innerHTML = 'Panas';
@@ -350,6 +364,29 @@
 
             //panggil fungsi geolocation
             getLokasi();
+
+            //kirim data ke database
+            function kirimdata() {
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://127.0.0.1:8000/riwayat',
+                    data: JSON.stringify({
+                        suhu: suhu,
+                        air_quality: air_quality,
+                        humidty: humidty
+                    }),
+
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function(data) {
+                        console.log("data terkirim ...");
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+
+                });
+            }
 
 
             //fungsi ubah detik jadi clocks
@@ -369,7 +406,7 @@
 
             function clock() {
                 myTimer = setInterval(myClock, 1000);
-                var detikawal = 360; //ganti waktu sesuai jumlah detik auto request
+                var detikawal = 120; //ganti waktu sesuai jumlah detik auto request
                 var c = detikawal;
 
 

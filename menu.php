@@ -23,6 +23,17 @@ $page = $_GET['page'];
     <link href="plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
     <link href="assets/css/dashboard/dash_1.css" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <script>
+	if (typeof(Storage) !== "undefined") {
+	    //siiip
+	} else {
+	    alert("Maaf Browser tidak support! Silahkan update lebih baik");
+			window.location.href="https://www.google.com/chrome/";
+	}
+	if(localStorage.getItem("usernama")===null){
+		window.location = "login.php";
+	}
+	</script>
 </head>
 
 <body>
@@ -272,22 +283,7 @@ $page = $_GET['page'];
                     }
 
                 });
-                // $.get("http://127.0.0.1:8000/riwayat", function(data, status) {
-                //     console.log(data[0]);
-                //     for (i = 0; i < data.length; i++) {
-                //         htmldata +=
-                //             '<tr>' +
-                //             '<td>' + i + '</td>' +
-                //             '<td>' + data[i].tanggal + '</td>' +
-                //             '<td>' + data[i].jam + '</td>' +
-                //             '<td>' + data[i].temp + '</td>' +
-                //             '<td>' + data[i].hum + '</td>' +
-                //             '<td>' + data[i].aqi + '</td>' +
-                //             '</tr>'
-                //     }
-                //     $('#show_data').html(htmldata);
-
-                // });
+            
             }
 
             tampil_riwayat();

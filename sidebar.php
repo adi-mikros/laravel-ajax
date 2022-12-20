@@ -28,6 +28,10 @@
                                 <li>
                                     <a href="menu.php?page=riwayat"> History </a>
                                 </li>
+
+                                <li>
+                                    <a href="logout.php">LogOut</a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
