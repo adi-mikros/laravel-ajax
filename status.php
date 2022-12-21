@@ -46,42 +46,17 @@
             <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12 ">
                     <span id="probabilitas_kebakaran"></span>
-                    <?php
-                    // if ($humidty > 50 && $air_quality < 100 && $suhu < 40) {
-                    //     echo '<h3 style="color:green;"><b>Status Kemungkinan Kebakaran</b></h3>';
-                    // } else {
-                    //     echo '<h3 style="color:red;"><b>Status Kemungkinan Kebakaran</b></h3>';
-                    // }
-
-                    ?>
-
                 </div>
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12 ">
                     <span id="ic_probabilitas_kebakaran"></span>
-
-                    <?php
-                    // if ($humidty > 50 && $air_quality < 100 && $suhu < 40) {
-                    //     echo '<img src="./assets/img/icon-api-hijau.png" alt="kelembaman-aman" style="max-width: 200px;" />';
-                    // } else {
-                    //     echo '<img src="./assets/img/icon-api-merah.png" alt="api-aman" style="max-width: 200px;" />';
-                    // }
-
-                    ?>
-
                     <hr><br>
                 </div>
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12 ">
                     <span id="stat_probabilitas_kebakaran"></span>
-
-                    <?php
-                    // if ($humidty > 50 && $air_quality < 100 && $suhu < 40) {
-                    //     echo '<h5 class="" style="color:green;">Status : Kemungkinan Rendah Kebakaran</h5>';
-                    // } else {
-                    //     echo '<h5 class="" style="color:red;">Status : Kemungkinan Tinggi Kebakaran</h5>';
-                    // }
-
-                    ?>
-
+                    <div class="well well-sm bg-info small m-4 text-white p-3">Status kemungkinan kebakaran:<br>
+                        Kemungkinan rendah kebakaran(kelembapan > 45, status kualitas udara <=300, status suhu < 29,7 derajat celcius)<br>
+                            Kemungkinan tinggi kebakaran(kelembapan < 45, status kualitas udara>300, status suhu >29,7 derajat celcius)<br>
+                    </div>
                 </div>
             </div>
         </div>
@@ -109,6 +84,11 @@
                     <!-- <h5> 90%</h5> <br> -->
                     <h5>Value : <span id="val_kelembapan"></span></h5>
                     <h5>Status : <span id="stat_kelembapan"></span></h5>
+
+                    <div class="well well-sm bg-info small m-4 text-white p-3">
+                        Aman (45-65)<br>
+                        Bahaya (<45 dan>65)
+                    </div>
                 </div>
             </div>
         </div>
@@ -125,7 +105,7 @@
                     <h3><b>Status Kualitas Udara</b></h3>
                 </div>
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12 ">
-                   <span id="img_airc"></span>
+                    <span id="img_airc"></span>
 
                     <!-- <span style="font-size: 80px; margin-top: 20px;" class="m-5"> 90%</span> -->
                     <hr><br>
@@ -135,6 +115,12 @@
                     <!-- <h5> 90%</h5> <br> -->
                     <h5>Value : <span id="val_airc"></span></h5>
                     <h5>Status : <span id="stat_airc"></span></h5>
+
+                    <div class="well well-sm bg-info small m-4 text-white p-3">
+                        Aman (<=300)<br>
+                            Bahaya (>300)
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -151,7 +137,7 @@
                     <h3><b>Status Suhu</b></h3>
                 </div>
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12 ">
-                   <span id="img_suhu"></span>
+                    <span id="img_suhu"></span>
                     <!-- <span style="font-size: 80px; margin-top: 20px;" class="m-5"> 90%</span> -->
                     <hr><br>
                 </div>
@@ -160,6 +146,13 @@
                     <!-- <h5> 90%</h5> <br> -->
                     <h5>Value : <span id="val_suhu"></span></h5>
                     <h5>Status : <span id="stat_suhu"></span></h5>
+
+                    <div class="well well-sm bg-info small m-4 text-white p-3">
+                        Normal (21,7 &#8451; - 29,7  &#8451;) <br>
+                        Dingin (<21,7 &#8451;) <br>
+                            Panas (>29,7 &#8451;)
+
+                    </div>
                 </div>
             </div>
         </div>
